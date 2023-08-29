@@ -23,7 +23,7 @@ public class SpringbootdemoApplication {
 //
 //    private void createStudent(StudentDAO studentDAO) {
 //        System.out.println("Creating new student object");
-//        Student student = new Student("John", "Legend", "johnlegend@gmail.com");
+//        Student student = new Student("John 2", "Legend 2", "johnlegend2@gmail.com");
 //
 //        System.out.println("Saving the student");
 //        studentDAO.save(student);
