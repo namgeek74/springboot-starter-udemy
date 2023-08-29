@@ -14,24 +14,24 @@ public class SpringbootdemoApplication {
         SpringApplication.run(SpringbootdemoApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
-        return runner -> {
-            createStudent(studentDAO);
-        };
-    }
-
-    private void createStudent(StudentDAO studentDAO) {
-        System.out.println("Creating new student object");
-        Student student = new Student("John 2", "Legend 2", "johnlegend2@gmail.com");
-
-        System.out.println("Saving the student");
-        studentDAO.save(student);
-
-        System.out.println("Saved student, generated id: " + student.getId());
-
-        System.out.println("Read student");
-        System.out.println("Student: " + studentDAO.findById(student.getId()));
-    }
+//    @Bean
+//    public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
+//        return runner -> {
+//            createStudent(studentDAO);
+//        };
+//    }
+//
+//    private void createStudent(StudentDAO studentDAO) {
+//        System.out.println("Creating new student object");
+//        Student student = new Student("John 2", "Legend 2", "johnlegend2@gmail.com");
+//
+//        System.out.println("Saving the student");
+//        studentDAO.save(student);
+//
+//        System.out.println("Saved student, generated id: " + student.getId());
+//
+//        System.out.println("Read student");
+//        System.out.println("Student: " + studentDAO.findById(student.getId()));
+//    }
 
 }
