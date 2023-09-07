@@ -43,7 +43,7 @@ public class SpringbootdemoApplication {
     @Bean
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
         return runner -> {
-            createInstructorWithCourses(appDAO);
+//            findInstructorWithCourses(appDAO);
         };
     }
 
@@ -107,6 +107,35 @@ public class SpringbootdemoApplication {
         System.out.println("Saving");
         appDAO.save(tempInstructor);
         System.out.println("Done!");
+    }
+
+    private void findInstructorWithoutCourses(AppDAO appDAO) {
+        int theId = 1;
+        System.out.println("Finding the instructor id: " + theId);
+        Instructor instructor = appDAO.findInstructorById(theId);
+        System.out.println("instructor: " + instructor);
+        System.out.println("Done");
+    }
+
+    private void findCoursesForInstructor(AppDAO appDAO) {
+        int theId = 1;
+        System.out.println("Finding instructor id: " + theId);
+        Instructor instructor = appDAO.findInstructorById(theId);
+        System.out.println("instructor: " + instructor);
+        System.out.println("Finding courses for instructor id: " + theId);
+        List<Course> courses = appDAO.findCoursesByInstructorId(theId);
+        instructor.setCourses(courses);
+        System.out.println("courses: " + instructor.getCourses());
+        System.out.println("Done");
+    }
+
+    private void findInstructorWithCourses(AppDAO appDAO) {
+        int theId = 1;
+        System.out.println("Finding instructor id: " + theId);
+        Instructor instructor = appDAO.findInstructorByIdJoinFetch(theId);
+        System.out.println("instructor: " + instructor);
+        System.out.println("courses: " + instructor.getCourses());
+        System.out.println("Done");
     }
 
 }
