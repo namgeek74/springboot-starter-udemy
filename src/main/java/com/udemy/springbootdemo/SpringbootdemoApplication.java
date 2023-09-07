@@ -1,6 +1,9 @@
 package com.udemy.springbootdemo;
 
+import com.udemy.springbootdemo.dao.AppDAO;
 import com.udemy.springbootdemo.dao.StudentDAO;
+import com.udemy.springbootdemo.entity.Instructor;
+import com.udemy.springbootdemo.entity.InstructorDetail;
 import com.udemy.springbootdemo.entity.Student;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -33,5 +36,55 @@ public class SpringbootdemoApplication {
 //        System.out.println("Read student");
 //        System.out.println("Student: " + studentDAO.findById(student.getId()));
 //    }
+
+    @Bean
+    public CommandLineRunner commandLineRunner(AppDAO appDAO) {
+        return runner -> {
+            deleteInstructorDetail(appDAO);
+        };
+    }
+
+    private void createInstructor(AppDAO appDAO) {
+        // create the instructor
+//        Instructor tempInstructor = new Instructor("Chad", "Darby", "chaddarby@gmail.com");
+//        InstructorDetail tempInstructorDetail = new InstructorDetail("youtube channel 1", "coding");
+//        tempInstructor.setInstructorDetail(tempInstructorDetail);
+
+        Instructor tempInstructor = new Instructor("Madhu", "Patel", "madhupatel@gmail.com");
+        InstructorDetail tempInstructorDetail = new InstructorDetail("youtube channel 2", "coding 2");
+        tempInstructor.setInstructorDetail(tempInstructorDetail);
+
+        // save the instructor
+        System.out.println("Saving");
+        appDAO.save(tempInstructor);
+        System.out.println("Done!");
+    }
+
+    private void findInstructor(AppDAO appDAO) {
+        int theId = 1;
+        Instructor instructor = appDAO.findInstructorById(theId);
+        System.out.println(instructor);
+    }
+
+    private void deleteInstructor(AppDAO appDAO) {
+        int theId = 1;
+        System.out.println("Start delete an instructor with it: " + theId);
+        appDAO.deleteInstructorById(theId);
+        System.out.println("Deleted!");
+    }
+
+    private void findInstructorDetail(AppDAO appDAO) {
+        int theId = 2;
+        InstructorDetail instructorDetail = appDAO.findInstructorDetailById(theId);
+        System.out.println(instructorDetail);
+        System.out.println(instructorDetail.getInstructor());
+    }
+
+    private void deleteInstructorDetail(AppDAO appDAO) {
+        int theId = 3;
+        System.out.println("Start delete an instructor detail with it: " + theId);
+        appDAO.deleteInstructorDetailById(theId);
+        System.out.println("Deleted successfully!");
+    }
 
 }

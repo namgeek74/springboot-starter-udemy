@@ -70,11 +70,4 @@ public class SecurityConfig {
 //        return http.build();
 //
 //    }
-
-    @Bean
-    public CommandLineRunner commandLineRunner(String[] args) {
-        return runner -> {
-            System.out.println("Hello World");
-        };
-    }
 }
