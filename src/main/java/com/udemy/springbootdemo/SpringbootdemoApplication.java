@@ -2,6 +2,7 @@ package com.udemy.springbootdemo;
 
 import com.udemy.springbootdemo.dao.AppDAO;
 import com.udemy.springbootdemo.dao.StudentDAO;
+import com.udemy.springbootdemo.entity.Course;
 import com.udemy.springbootdemo.entity.Instructor;
 import com.udemy.springbootdemo.entity.InstructorDetail;
 import com.udemy.springbootdemo.entity.Student;
@@ -9,6 +10,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.util.List;
 
 @SpringBootApplication
 public class SpringbootdemoApplication {
@@ -40,7 +43,7 @@ public class SpringbootdemoApplication {
     @Bean
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
         return runner -> {
-            deleteInstructorDetail(appDAO);
+            createInstructorWithCourses(appDAO);
         };
     }
 
@@ -85,6 +88,25 @@ public class SpringbootdemoApplication {
         System.out.println("Start delete an instructor detail with it: " + theId);
         appDAO.deleteInstructorDetailById(theId);
         System.out.println("Deleted successfully!");
+    }
+
+    private void createInstructorWithCourses(AppDAO appDAO) {
+        Instructor tempInstructor = new Instructor("Madhu", "Patel", "madhupatel@gmail.com");
+        InstructorDetail tempInstructorDetail = new InstructorDetail("madhu youtube channel", "coding");
+
+        tempInstructor.setInstructorDetail(tempInstructorDetail);
+
+        Course course1 = new Course("math");
+        Course course2 = new Course("physical");
+        Course course3 = new Course("run");
+        tempInstructor.add(course1);
+        tempInstructor.add(course2);
+        tempInstructor.add(course3);
+
+        // save the instructor
+        System.out.println("Saving");
+        appDAO.save(tempInstructor);
+        System.out.println("Done!");
     }
 
 }
