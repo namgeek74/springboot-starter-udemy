@@ -5,6 +5,7 @@ import com.udemy.springbootdemo.dao.StudentDAO;
 import com.udemy.springbootdemo.entity.Course;
 import com.udemy.springbootdemo.entity.Instructor;
 import com.udemy.springbootdemo.entity.InstructorDetail;
+import com.udemy.springbootdemo.entity.Review;
 import com.udemy.springbootdemo.entity.Student;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -43,7 +44,7 @@ public class SpringbootdemoApplication {
     @Bean
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
         return runner -> {
-            deleteCourse(appDAO);
+            deleteCourseAndReviews(appDAO);
         };
     }
 
@@ -168,6 +169,30 @@ public class SpringbootdemoApplication {
         appDAO.deleteCourse(theId);
         System.out.println("Deleted successfully!");
 
+    }
+
+    private void createCourseAndReview(AppDAO appDAO) {
+        Course course = new Course("Spring Boot starter");
+        course.addReview(new Review("Great, i love it"));
+        course.addReview(new Review("Cool course, i'm done"));
+        course.addReview(new Review("What a dumb course, you are an idiot!"));
+
+        appDAO.save(course);
+        System.out.println("Created Successfully");
+    }
+
+    private void findCourseAndReviewByCourseId(AppDAO appDAO) {
+        int theId = 10;
+        Course course = appDAO.findCourseAndReviewByCourseId(theId);
+        System.out.println("course: " + course);
+        System.out.println("reviews: " + course.getReviews());
+        System.out.println("Done");
+    }
+
+    private void deleteCourseAndReviews(AppDAO appDAO) {
+        int theId = 10;
+        appDAO.deleteCourse(theId);
+        System.out.println("Done");
     }
 
 }
