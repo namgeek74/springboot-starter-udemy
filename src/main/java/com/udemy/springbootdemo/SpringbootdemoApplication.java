@@ -43,7 +43,7 @@ public class SpringbootdemoApplication {
     @Bean
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
         return runner -> {
-//            findInstructorWithCourses(appDAO);
+            deleteCourse(appDAO);
         };
     }
 
@@ -136,6 +136,38 @@ public class SpringbootdemoApplication {
         System.out.println("instructor: " + instructor);
         System.out.println("courses: " + instructor.getCourses());
         System.out.println("Done");
+    }
+
+    private void updateInstructor(AppDAO appDAO) {
+        int theId = 1;
+        Instructor instructor = appDAO.findInstructorById(theId);
+        instructor.setFirstName("New first name");
+
+        appDAO.updateInstructor(instructor);
+        System.out.println("Update successfully");
+    }
+
+    private void updateCourse(AppDAO appDAO) {
+        int theId = 10;
+        Course course = appDAO.findCourseById(theId);
+        course.setTitle("New title updated");
+        System.out.println("Updating course id: " + theId);
+
+        appDAO.updateCourse(course);
+        System.out.println("Update course successfully");
+    }
+
+    private void deleteInstructorByIdWithoutCourse(AppDAO appDAO) {
+        int theId = 1;
+        appDAO.deleteInstructorByIdWithoutCourse(theId);
+        System.out.println("Deleted successfully!");
+    }
+
+    private void deleteCourse(AppDAO appDAO) {
+        int theId = 10;
+        appDAO.deleteCourse(theId);
+        System.out.println("Deleted successfully!");
+
     }
 
 }
