@@ -1,5 +1,6 @@
 package com.udemy.springbootdemo;
 
+import com.udemy.springbootdemo.dao.AccountDAO;
 import com.udemy.springbootdemo.dao.AppDAO;
 import com.udemy.springbootdemo.dao.StudentDAO;
 import com.udemy.springbootdemo.entity.Course;
@@ -40,13 +41,6 @@ public class SpringbootdemoApplication {
 //        System.out.println("Read student");
 //        System.out.println("Student: " + studentDAO.findById(student.getId()));
 //    }
-
-    @Bean
-    public CommandLineRunner commandLineRunner(AppDAO appDAO) {
-        return runner -> {
-            deleteStudent(appDAO);
-        };
-    }
 
     private void createInstructor(AppDAO appDAO) {
         // create the instructor
@@ -228,6 +222,19 @@ public class SpringbootdemoApplication {
         int id = 1;
         appDAO.deleteStudent(id);
         System.out.println("Done");
+    }
+
+    @Bean
+    public CommandLineRunner commandLineRunner(AccountDAO accountDAO) {
+        return runner -> {
+            System.out.println("Hello world");
+            demoTheBeforeAdvice(accountDAO);
+        };
+    }
+
+    private void demoTheBeforeAdvice(AccountDAO accountDAO) {
+        // call the business method
+        accountDAO.addAccount();
     }
 
 }
