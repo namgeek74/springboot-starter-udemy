@@ -44,7 +44,7 @@ public class SpringbootdemoApplication {
     @Bean
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
         return runner -> {
-            deleteCourseAndReviews(appDAO);
+            deleteStudent(appDAO);
         };
     }
 
@@ -164,13 +164,6 @@ public class SpringbootdemoApplication {
         System.out.println("Deleted successfully!");
     }
 
-    private void deleteCourse(AppDAO appDAO) {
-        int theId = 10;
-        appDAO.deleteCourse(theId);
-        System.out.println("Deleted successfully!");
-
-    }
-
     private void createCourseAndReview(AppDAO appDAO) {
         Course course = new Course("Spring Boot starter");
         course.addReview(new Review("Great, i love it"));
@@ -189,9 +182,51 @@ public class SpringbootdemoApplication {
         System.out.println("Done");
     }
 
-    private void deleteCourseAndReviews(AppDAO appDAO) {
+    private void deleteCourse(AppDAO appDAO) {
         int theId = 10;
         appDAO.deleteCourse(theId);
+        System.out.println("Done");
+    }
+
+    private void createCourseAndStudents(AppDAO appDAO) {
+        Course course = new Course("spring boot starter");
+        course.addStudent(new Student("Nam", "Nguyen", "namnguyen@gmail.com"));
+        course.addStudent(new Student("Huy", "Nguyen", "huynguyen@gmail.com"));
+        course.addStudent(new Student("Khanh", "Tran", "khanhtran@gmail.com"));
+        System.out.println("Starting");
+        appDAO.save(course);
+        System.out.println("Done");
+    }
+
+    private void findCourseAndStudents(AppDAO appDAO) {
+        int theId = 10;
+        Course course = appDAO.findCourseAndStudentsByCourseId(theId);
+        System.out.println("course: " + course);
+        System.out.println("students: " + course.getStudents());
+        System.out.println("Done");
+    }
+
+    private void findStudentAndCourses(AppDAO appDAO) {
+        int id = 1;
+        Student student = appDAO.findStudentAndCoursesByStudentId(id);
+        System.out.println("student: " + student);
+        System.out.println("courses: " + student.getCourses());
+        System.out.println("Done");
+    }
+
+    private void addMoreCoursesForStudent(AppDAO appDAO) {
+        int id = 1;
+        Student student = appDAO.findStudentAndCoursesByStudentId(id);
+        student.addCourse(new Course("bitcoin and more"));
+        student.addCourse(new Course("youtuber"));
+        System.out.println("Starting");
+        appDAO.update(student);
+        System.out.println("Done");
+    }
+
+    private void deleteStudent(AppDAO appDAO) {
+        int id = 1;
+        appDAO.deleteStudent(id);
         System.out.println("Done");
     }
 
