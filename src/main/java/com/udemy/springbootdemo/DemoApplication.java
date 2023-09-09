@@ -2,7 +2,6 @@ package com.udemy.springbootdemo;
 
 import com.udemy.springbootdemo.dao.AccountDAO;
 import com.udemy.springbootdemo.dao.AppDAO;
-import com.udemy.springbootdemo.dao.StudentDAO;
 import com.udemy.springbootdemo.entity.Course;
 import com.udemy.springbootdemo.entity.Instructor;
 import com.udemy.springbootdemo.entity.InstructorDetail;
@@ -16,38 +15,13 @@ import org.springframework.context.annotation.Bean;
 import java.util.List;
 
 @SpringBootApplication
-public class SpringbootdemoApplication {
+public class DemoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringbootdemoApplication.class, args);
+        SpringApplication.run(DemoApplication.class, args);
     }
 
-//    @Bean
-//    public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
-//        return runner -> {
-//            createStudent(studentDAO);
-//        };
-//    }
-//
-//    private void createStudent(StudentDAO studentDAO) {
-//        System.out.println("Creating new student object");
-//        Student student = new Student("John 2", "Legend 2", "johnlegend2@gmail.com");
-//
-//        System.out.println("Saving the student");
-//        studentDAO.save(student);
-//
-//        System.out.println("Saved student, generated id: " + student.getId());
-//
-//        System.out.println("Read student");
-//        System.out.println("Student: " + studentDAO.findById(student.getId()));
-//    }
-
     private void createInstructor(AppDAO appDAO) {
-        // create the instructor
-//        Instructor tempInstructor = new Instructor("Chad", "Darby", "chaddarby@gmail.com");
-//        InstructorDetail tempInstructorDetail = new InstructorDetail("youtube channel 1", "coding");
-//        tempInstructor.setInstructorDetail(tempInstructorDetail);
-
         Instructor tempInstructor = new Instructor("Madhu", "Patel", "madhupatel@gmail.com");
         InstructorDetail tempInstructorDetail = new InstructorDetail("youtube channel 2", "coding 2");
         tempInstructor.setInstructorDetail(tempInstructorDetail);
