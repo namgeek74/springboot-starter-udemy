@@ -1,7 +1,11 @@
 package com.udemy.springbootdemo.aspect;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -67,5 +71,41 @@ public class DemoLoggingAspect {
         System.out.println("result in advice: " + result);
 
         result.append(" extra data in after advice");
+    }
+
+    @AfterThrowing(
+            pointcut = "execution(* throwDemoa(..))",
+            throwing = "exc"
+    )
+    public void afterThrowingAdvice(JoinPoint joinPoint, Exception exc) {
+        System.out.println("=====>>> @AfterThrowing advice");
+        System.out.println("method: " + joinPoint.getSignature().toShortString());
+        System.out.println("exception in advice: " + exc);
+    }
+
+    @After("execution(* throwDemoa(..)) || execution(* testAfterReturning(..))")
+    public void afterAdvice() {
+        System.out.println("=====>>> @After advice");
+    }
+
+    @Around("execution(* throwDemo(..))")
+    public Object aroundAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        System.out.println("@Around advice");
+        System.out.println("method: " + proceedingJoinPoint.getSignature().toShortString());
+        Object result = null;
+        long begin = System.currentTimeMillis();
+        try {
+            result = proceedingJoinPoint.proceed();
+        } catch (Exception e) {
+            System.out.println("Some error in @Around advice");
+            result = "Nothing here, move along!";
+        }
+        long end = System.currentTimeMillis();
+
+        long duration = end - begin;
+        System.out.println("Duration: " + duration / 1000.0 + " seconds");
+
+        return result;
+
     }
 }

@@ -5,4 +5,6 @@ public interface AccountDAO {
     void addAccount();
 
     StringBuilder  testAfterReturning(int num);
+
+    void throwDemo();
 }

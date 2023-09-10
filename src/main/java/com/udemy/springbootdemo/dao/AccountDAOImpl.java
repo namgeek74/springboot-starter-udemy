@@ -13,4 +13,10 @@ public class AccountDAOImpl implements AccountDAO {
     public StringBuilder testAfterReturning(int num) {
         return new StringBuilder("test after returning advice " + num);
     }
+
+    @Override
+    public void throwDemo() {
+        throw new RuntimeException("new exception in runtime");
+        // double value = 10 / 0;
+    }
 }

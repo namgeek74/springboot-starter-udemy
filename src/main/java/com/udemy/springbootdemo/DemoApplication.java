@@ -202,7 +202,8 @@ public class DemoApplication {
     public CommandLineRunner commandLineRunner(AccountDAO accountDAO) {
         return runner -> {
             System.out.println("Hello world");
-            demoTheBeforeAdvice(accountDAO);
+            // demoTheBeforeAdvice(accountDAO);
+            demoTheAfterThrowingAdvice(accountDAO);
         };
     }
 
@@ -212,6 +213,16 @@ public class DemoApplication {
 
         StringBuilder result = accountDAO.testAfterReturning(1);
         System.out.println("result: " + result);
+    }
+
+    private void demoTheAfterThrowingAdvice(AccountDAO accountDAO) {
+        // call the business method
+        try {
+            accountDAO.throwDemo();
+            System.out.println("success in main");
+        } catch (Exception e) {
+            System.out.println("exception in main: " + e);
+        }
     }
 
 }
