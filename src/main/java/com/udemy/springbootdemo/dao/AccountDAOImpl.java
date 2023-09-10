@@ -8,4 +8,9 @@ public class AccountDAOImpl implements AccountDAO {
     public void addAccount() {
         System.out.println(getClass() + ": DOING MY DB WORK: ADDING AN ACCOUNT");
     }
+
+    @Override
+    public StringBuilder testAfterReturning(int num) {
+        return new StringBuilder("test after returning advice " + num);
+    }
 }

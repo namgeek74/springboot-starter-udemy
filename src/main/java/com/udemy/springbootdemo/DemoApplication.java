@@ -209,6 +209,9 @@ public class DemoApplication {
     private void demoTheBeforeAdvice(AccountDAO accountDAO) {
         // call the business method
         accountDAO.addAccount();
+
+        StringBuilder result = accountDAO.testAfterReturning(1);
+        System.out.println("result: " + result);
     }
 
 }
