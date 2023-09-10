@@ -201,9 +201,9 @@ public class DemoApplication {
     @Bean
     public CommandLineRunner commandLineRunner(AccountDAO accountDAO) {
         return runner -> {
-            System.out.println("Hello world");
+            // System.out.println("Hello world");
             // demoTheBeforeAdvice(accountDAO);
-            demoTheAfterThrowingAdvice(accountDAO);
+            // demoTheAfterThrowingAdvice(accountDAO);
         };
     }
 
