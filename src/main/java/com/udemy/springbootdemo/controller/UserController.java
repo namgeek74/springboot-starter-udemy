@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    private UserInfoService service;
+    private UserInfoService userInfoService;
 
     @Autowired
     private JwtService jwtService;
@@ -32,7 +32,7 @@ public class UserController {
 
     @PostMapping("/addNewUser")
     public String addNewUser(@RequestBody UserInfo userInfo) {
-        return service.addUser(userInfo);
+        return userInfoService.addUser(userInfo);
     }
 
     @GetMapping("/user/userProfile")
