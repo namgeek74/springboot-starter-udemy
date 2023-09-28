@@ -1,6 +1,8 @@
 package com.udemy.springbootdemo.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.udemy.springbootdemo.entity.Student;
+import com.udemy.springbootdemo.entity.StudentOnly;
 import com.udemy.springbootdemo.service.StudentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,12 +21,12 @@ public class StudentController {
     }
 
     @GetMapping()
-    public List<Student> getListStudent() {
+    public List<StudentOnly> getListStudent() {
         return studentService.getListStudent();
     }
 
-    @GetMapping("/{email}")
-    public List<Student> getListStudentByName(@PathVariable String email) {
-        return studentService.findStudentByName(email);
+    @GetMapping("/redis")
+    public List<StudentOnly> getDriverByRedis() throws JsonProcessingException {
+        return studentService.getDriverByRedis();
     }
 }

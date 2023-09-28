@@ -198,15 +198,6 @@ public class DemoApplication {
         System.out.println("Done");
     }
 
-    @Bean
-    public CommandLineRunner commandLineRunner(AccountDAO accountDAO) {
-        return runner -> {
-            // System.out.println("Hello world");
-            // demoTheBeforeAdvice(accountDAO);
-            // demoTheAfterThrowingAdvice(accountDAO);
-        };
-    }
-
     private void demoTheBeforeAdvice(AccountDAO accountDAO) {
         // call the business method
         accountDAO.addAccount();
@@ -225,4 +216,12 @@ public class DemoApplication {
         }
     }
 
+    @Bean
+    public CommandLineRunner commandLineRunner(AccountDAO accountDAO) {
+        return runner -> {
+            String str = "Nam Nguyen";
+            int hashValue = str.hashCode();
+            System.out.println("hashed value of '" + str + "' is: " + hashValue);
+        };
+    }
 }

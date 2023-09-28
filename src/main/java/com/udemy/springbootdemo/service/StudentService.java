@@ -1,11 +1,13 @@
 package com.udemy.springbootdemo.service;
 
-import com.udemy.springbootdemo.entity.Student;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.udemy.springbootdemo.entity.StudentOnly;
 
 import java.util.List;
 
 public interface StudentService {
-    List<Student> getListStudent();
+    List<StudentOnly> getListStudent();
 
-    List<Student> findStudentByName(String email);
+    List<StudentOnly> getDriverByRedis() throws JsonProcessingException;
+
 }
