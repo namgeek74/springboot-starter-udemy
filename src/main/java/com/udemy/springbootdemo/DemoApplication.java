@@ -164,6 +164,8 @@ public class DemoApplication {
         System.out.println("Starting");
         appDAO.save(course);
         System.out.println("Done");
+        System.out.println("Done");
+
     }
 
     private void findCourseAndStudents(AppDAO appDAO) {
